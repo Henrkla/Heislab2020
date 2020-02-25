@@ -120,7 +120,8 @@ int hardware_read_floor_sensor(int floor){
 }
 
 int hardware_read_order(int floor, HardwareOrder order_type){
-    if(!hardware_legal_floor(floor, order_type)){
+	for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++) {
+		if (hardware_read_order(f, HARDWARE_ORDER_INSIDE)) {
         return 0;
     }
 
