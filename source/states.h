@@ -14,3 +14,8 @@ void states_set_motor_dir(HardwareMovement movement);
   * @return Neste etasje med bestillinger i bevegelsesretningen, returnerer -1 hvis det ikke er bestillinger
 */
 int states_get_next_dest();
+
+
+/** @brief Kjører heisen fra currentFloor til targetFloor
+*/
+void states_goto_floor(int targetFloor);

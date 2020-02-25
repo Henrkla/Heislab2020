@@ -13,7 +13,7 @@ static int previusDirection = HARDWARE_MOVEMENT_STOP;
 
 
 // floor check
-
+// viktig at dette ikke er -1
 void states_update_current_floor() {
 	currentFloor = // floor check
 }
@@ -25,6 +25,8 @@ void states_set_motor_dir(HardwareMovement movement) {
 	}
 	hardware_command_movement(movement);
 }
+
+
 
 int states_get_next_dest() {
 	if (previusDirection == HARDWARE_MOVEMENT_UP) {
@@ -38,9 +40,18 @@ int states_get_next_dest() {
 	return -1;
 }
 
-void states_goto_floor(int targetFloor) {
-	while (currentFloor != targetFloor) {
 
+
+void states_goto_floor(int targetFloor) {
+	states_update_current_floor();
+	while (currentFloor != targetFloor) {
+		if ((targetFloor < currentFloor) && (currentFloor != 0)) {
+			states_set_motor_dir(HARDWARE_MOVEMENT_DOWN);
+		}
+		else if ((targetFloor > currentFloor) && (currentFloor != HARDWARE_NUMBER_OF_FLOORS - 1)) {
+			states_set_motor_dir(HARDWARE_MOVEMENT_UP);
+		}
+		states_update_current_floor();
 	}
 }
 
