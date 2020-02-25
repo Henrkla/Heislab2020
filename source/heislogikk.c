@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "heislogikk.h"
+#include "lights.h"
+#include "door.h"
 
 void start_elevator() {
-	lights_reset();
+	lights_order_emergency_clear_all();
 	while (current_floor() != 0) {
 		hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
 		lights_floor_indicator();
@@ -14,64 +16,53 @@ void start_elevator() {
 	hardware_command_movement(direction);
 };
 
-int current_floor() {
+int floor_check() {
 	for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
 		if (hardware_read_floor_sensor(i)) {
 			return i;
 		}
 	}
-	return -1
-}
-
-void lights_floor_indicator() {
-	int floor = current_floor();
-	if (floor != -1) {
-		hardware_command_floor_indicator_on(floor);
-	}
+	return -1;
 };
 
-/*
-void lights_reset() {
-Trenger queue for å kunne resete lysene
+int current_last_floorindicator() {
+	int currentlastfloor = f
+		if floor_check() != -1 {
+			currentlastfloor = floor_check();
+		else
+			return f;
+	}
+	return f;
 }
-
-
-*/
 
 void stop_button_check_delete() {
-	if (hardware_read_stop_signal()) {
-		lights_reset();
+	while (hardware_read_stop_signal()) {
+		lights_order_emergency_clear_all();
 		direction = HARDWARE_MOVEMENT_STOP;
 		hardware_command_movement(direction);
-		while (hardware_read_stop_signal()) {
-			hardware_command_stop_light(1);
-			stop_button_door();
-		}
-		hardware_command_stop_light(0)
-		stop_button_pressed = 1
+		queue_clear_all_floors();
+		hardware_command_stop_light(1);
+		door_stop_button();
 	}
-
-}
+	hardware_command_stop_light(0);
+};
 
 void timer() {
 	time_t start_time = time(NULL);
 	time_t current_time = time(NULL);
 	double time_used = difftime(current_time, start_time);
 
-	while (time_use)
+	while (time_used) < (3.0) {
 
-};
+		if (hardware_read_obstruction_signal() || hardware_read_stop_signal()) {
+			start_time = time(NULL);
 
-void door() {
-	hardware_command_door_open(1);
-	timer();
-	hardware_command_door_open(0);
-};
+		}
+		current_time = time(NULL);
+		time_used = difftime(current_time, start_time);
 
-void stop_button_door() {
-	if (current_floor() != -1) {
-		door();
+		if (!hardware_read_stop_signal()) {
+			hardware_command_stop_light(0);
+		}
 	}
 };
-
-;

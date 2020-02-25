@@ -19,7 +19,6 @@ int queue_check_multiple_orders(int floor);
   */
 void queue_fetch_button_inputs();
 
-
 /** @brief fjerner alle bestillinger i en etasje
 */
 void queue_clear_floor(int floor);
