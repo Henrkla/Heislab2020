@@ -27,9 +27,46 @@ int states_get_next_dest();
 
 
 /** @brief Kjører heisen fra currentFloor til targetFloor
+  * @param[in] targetfloor Etasjen heisen skal kjøre til
 */
 void states_goto_floor(int targetFloor);
 
+
+/** @brief Endrer nextState variabelen til state
+  * @param[in] state Tilstanden hesen skal til neste gang states_get_next_state kalles
+*/
 void states_set_next_state(States state);
 
+
+/** @brief Kalles for å endre nåhverdne state til til nextState
+*/
 States states_get_next_state();
+
+
+
+/*
+De følgene funskjonene er alle states som brukes i main.c
+
+*/
+
+
+/** @brief State for når heisen står stille og leter etter bestillinger
+*/
+void state_idle();
+
+
+/** @brief State for når heisen betjener en bestilling
+*/
+void state_stay();
+
+
+/** @brief State for når heisen kjører til en etasje
+*/
+
+void state_run();
+
+
+/** @brief State for når stopknappen er trykket inn og det er en nødsituasjon
+*/
+void state_emergency();
+

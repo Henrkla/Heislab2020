@@ -26,13 +26,31 @@ int main(){
 
 	start_elevator();
 
+	//
+
 	while(1) {
-/* Switch skal her*/
+		
+		if (hardware_read_obstruction_signal()) {
+			states_set_next_state(EMERGENCY);
+		}
+		queue_fetch_button_inputs();
+		lights_floor_indicator();
 
 
-
-
-
+		switch (states_get_next_state()) {
+			case IDLE:
+				state_idle();
+				break;
+			case RUN:
+				state_run();
+				break;
+			case STAY:
+				state_stay();
+				break;
+			case EMERGENCY:
+				state_emergency();
+				break;
+		}
 	}
 
 

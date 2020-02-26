@@ -17,7 +17,7 @@ void lights_floor_indicator();
 * @brief Rester lysene på panelet
 */
 
-void lights_reset_floor();
+void lights_reset_floor(int floor);
 
 /**
 * @brief Rester alle lysene ved emergency

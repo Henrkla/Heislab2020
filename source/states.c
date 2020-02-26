@@ -37,11 +37,13 @@ int states_get_next_dest() {
 	states_update_current_floor();
 	if (previusDirection == HARDWARE_MOVEMENT_UP) {
 		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
-		return queue_check_orders_below_motor(current_floor, HARDWARE_MOVEMENT_UP);
+		return queue_check_orders_above(currentFloor);
+		return queue_check_orders_below(currentFloor);
 	}
 	else if (previusDirection == HARDWARE_MOVEMENT_DOWN) {
 		return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
-		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
+		return queue_check_orders_below(currentFloor);
+		return queue_check_orders_above(currentFloor);
 	}
 	return -1;
 }
@@ -65,10 +67,10 @@ void states_set_next_state(States state) {
 	nextState = state;
 }
 
+
 States states_get_next_state() {
 	return nextState;
 }
-
 
 
 void state_idle() {
@@ -82,7 +84,7 @@ void state_idle() {
 
 
 void state_stay() {
-	//lights clear floor
+	lights_reset_floor(currentFloor)
 	queue_clear_floor(currentFloor);
 	door_open(); // denne funksjonen trenger obstruction logikk
 	if (states_get_next_dest() == -1) {
@@ -97,8 +99,22 @@ void state_stay() {
 void state_run() {
 	int dest = states_get_next_dest();
 	states_goto_floor(dest);
-
+	states_set_next_state(STAY);
 }
+
+
+void state_emergency() {
+	while (hardware_read_stop_signal()) {
+		lights_order_emergency_clear_all();
+		hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+		queue_clear_all_floors();
+		hardware_command_stop_light(1);
+		door_stop_button();
+	}
+	hardware_command_stop_light(0);
+}
+
+
 
 
 
