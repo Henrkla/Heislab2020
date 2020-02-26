@@ -9,7 +9,6 @@
 #define BEETWEEN_FLOORS -1
 
 static int currentFloor = BEETWEEN_FLOORS;
-static int nextFloor = BEETWEEN_FLOORS;
 
 static int currentDirection = HARDWARE_MOVEMENT_STOP;
 static int previusDirection = HARDWARE_MOVEMENT_STOP;
@@ -19,7 +18,7 @@ static States nextState = IDLE;
 
 
 void states_update_current_floor() {
-	currentFloor = current_last_floorindicator();
+	currentFloor = state_current_last_floorindicator();
 }
 
 void states_set_motor_dir(HardwareMovement movement) {
@@ -85,7 +84,7 @@ void state_stay() {
 	lights_reset_floor(currentFloor)
 	queue_clear_floor(currentFloor);
 	door_open();
-	obstruction_check();
+	door_obstruction_check();
 	if (states_get_next_dest() == -1) {
 		states_set_next_state(IDLE);
 	}
@@ -117,7 +116,7 @@ void state_emergency() {
 
 void state_init() {
 	lights_order_emergency_clear_all();
-	while (floor_check() = -1) {
+	while (state_floor_check() = -1) {
 		hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
 		lights_floor_indicator();
 	}
@@ -125,6 +124,26 @@ void state_init() {
 	direction = HARDWARE_MOVEMENT_STOP;
 	hardware_command_movement(direction);
 };
+
+int state_floor_check() {
+	for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
+		if (hardware_read_floor_sensor(i)) {
+			return i;
+		}
+	}
+	return -1;
+};
+
+int state_current_last_floorindicator() {
+	int currentlastfloor = f;
+		if state_floor_check() != -1 {
+			currentlastfloor = state_floor_check();
+		else
+			return f;
+		}
+	return f;
+}
+
 
 
 

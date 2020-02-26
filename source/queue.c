@@ -92,7 +92,7 @@ int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction)
 
 int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction) {
 	for (int floor = currentFloor; floor >= 0; floor--) {
-		if (queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction))) {
+		if ((queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction))) {
 			return floor;
 		}
 	}

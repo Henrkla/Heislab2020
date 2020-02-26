@@ -9,6 +9,9 @@
   * init vil også være en tilstand, men denne tilstanden vil bare være en tilstand helt i begynnelsen av programmet
   */
 
+#ifndef QUEUE_H
+#define QUEUE_H
+
 typedef enum {
 	IDLE,				/// Heisen står stille og venter på ny bestilling
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
@@ -81,7 +84,22 @@ void state_emergency();
 
 
 /**
-* @brief Setter heisen i første etasje når programmet begynner, samt skrur av alle etasje command lys.
+* @brief Kjører heisen en etasje ned når programmet starter, samt skrur av alle etasje command lys.
 */
 
 void state_init();
+
+/**
+* @brief Sjekker hvilken etasje heisen er i.
+* @return Returnerer etasje-integer. Returnerer -1 hvis mellom etasjer.
+*/
+int state_floor_check();
+
+/*
+* @brief sjekker siste etasje heisen har vært i. Brukes for å gi riktig etasjelys.
+*/
+
+int state_current_last_floorindicator();
+
+#endif
+
