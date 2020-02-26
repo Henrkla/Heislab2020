@@ -17,7 +17,7 @@ typedef enum ORDERS{
 	ORDER_UP = HARDWARE_ORDER_UP,			// Bestilling oppover
 	ORDER_DOWN = HARDWARE_ORDER_DOWN,		// Bestilling Nedover
 	ORDER_INSIDE = HARDWARE_ORDER_INSIDE	// Bestilling Både opp og ned eller Bestilling fra inne i heisen
-};
+} ORDER;
 
 
 /** @brief Sjekker om det er tryket inn både opp og ned knapp i en etasje

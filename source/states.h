@@ -20,12 +20,8 @@
   * init vil også være en tilstand, men denne tilstanden vil bare være en tilstand helt i begynnelsen av programmet
   */
 
-<<<<<<< HEAD
-typedef enum {
-=======
 
 typedef enum STATES {
->>>>>>> ec46f559fde9a91cf86122d82a06a8b5b106a49a
 	IDLE,				/// Heisen står stille og venter på ny bestilling
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
 	Go,					/// Heisen beveger seg til en annen bestilling for å betjene denne
@@ -40,7 +36,7 @@ void states_set_motor_dir(HardwareMovement movement);
 /** @brief Sjekker Motorretning og nåværende etasje og sjekker hva som bør være neste stop
   * @return Neste etasje med bestillinger i bevegelsesretningen, returnerer -1 hvis det ikke er bestillinger
 */
-int states_get_next_dest();
+STATES states_get_next_dest();
 
 
 /** @brief Kjører heisen fra currentFloor til targetFloor
