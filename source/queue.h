@@ -1,3 +1,12 @@
+
+
+#ifndef QUEUE_H
+#define QUEUE_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "hardware.h"
+
 /**@file
   *@brief Tar input signalene til knappene og legger dem inn i et array
   */
@@ -41,3 +50,5 @@ int queue_same_direction(int floor, HardwareMovement direction);
   * @return bestillingen som ligger i etasjen
 */
 ORDERS queue_check_order_floor(int floor);
+
+#endif

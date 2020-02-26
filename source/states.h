@@ -3,14 +3,23 @@
   */
 
 
+
+#ifndef STATES_H
+#define STATES_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "hardware.h"
+#include "lights.h"
+#include "door.h"
+#include "queue.h"
+
 /** Enum mulige tilstander
   *
   * Dette er de mulige tilstandene for switchen i main.c filen
   * init vil også være en tilstand, men denne tilstanden vil bare være en tilstand helt i begynnelsen av programmet
   */
 
-#ifndef QUEUE_H
-#define QUEUE_H
 
 typedef enum {
 	IDLE,				/// Heisen står stille og venter på ny bestilling
