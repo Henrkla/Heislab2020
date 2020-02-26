@@ -8,7 +8,6 @@
 void lights_floor_indicator() {
 	int floor = states_update_current_floor();
 	hardware_command_floor_indicator_on(floor);
-
 }
 
 void lights_reset_floor(int floor) {

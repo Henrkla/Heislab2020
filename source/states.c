@@ -113,9 +113,10 @@ int state_floor_check() {
 		}
 	}
 	return -1;
-};
+}
 
-void states_update_current_floor(); {
+
+void states_update_current_floor() {
 	if (state_floor_check() != -1) {
 		currentFloor = state_floor_check();
 	}

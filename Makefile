@@ -1,4 +1,4 @@
-SOURCES := main.c driver/hardware.c driver/io.c states.c door.c lights.c queue.c 
+SOURCES := main.c driver/hardware.c driver/io.c states.c door.c lights.c queue.c
 
 SOURCE_DIR := source
 BUILD_DIR := build

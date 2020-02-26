@@ -49,7 +49,7 @@ int queue_same_direction(int floor, HardwareMovement direction);
   * @param[in] floor etasjen som skal sjekkes
   * @return bestillingen som ligger i etasjen
 */
-ORDERS queue_check_order_floor(int floor);
+ORDER queue_check_order_floor(int floor);
 
 
 /** @brief Finner nærmeste bestilling over heisen, uavhengig av motorretning

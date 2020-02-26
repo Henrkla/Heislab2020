@@ -14,6 +14,8 @@
 #include "door.h"
 #include "queue.h"
 
+
+
 /** Enum mulige tilstander
   *
   * Dette er de mulige tilstandene for switchen i main.c filen
@@ -31,12 +33,6 @@ typedef enum STATES {
 /** @brief Setter motorretning i hardware filen, endrer også currentDirection og previusDirection variablene
 */
 void states_set_motor_dir(HardwareMovement movement);
-
-
-/** @brief Sjekker Motorretning og nåværende etasje og sjekker hva som bør være neste stop
-  * @return Neste etasje med bestillinger i bevegelsesretningen, returnerer -1 hvis det ikke er bestillinger
-*/
-STATE states_get_next_dest();
 
 
 /** @brief Kjører heisen fra currentFloor til targetFloor
@@ -94,7 +90,7 @@ int state_floor_check();
   * 
   * @return Returner etasje-integer. Returnerer siste etasje hvis mellom etasjer.
   */
-int states_update_current_floor();
+void states_update_current_floor();
 
 #endif
 
