@@ -17,8 +17,6 @@ static States nextState = IDLE;
 
 
 
-// floor check
-// viktig at dette ikke er -1
 void states_update_current_floor() {
 	currentFloor = state_current_last_floorindicator();
 }
@@ -116,7 +114,7 @@ void state_emergency() {
 }
 
 
-void state_init_elevator() {
+void state_init() {
 	lights_order_emergency_clear_all();
 	while (state_floor_check() = -1) {
 		hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
@@ -149,26 +147,3 @@ int state_current_last_floorindicator() {
 
 
 
-
-
-
-
-
-
-
-/*
-void states_init() {
-	int error = hardware_init();
-	if (error != 0) {
-		fprintf(stderr, "Unable to initialize hardware\n");
-		exit(1);
-	}
-	queue_clear_all_floors();
-	//lights_clear_all();
-	states_update_current_floor();
-	if (currentFloor == BEETWEEN_FLOORS) {
-		nextFloor = 1;
-	}
-
-}
-*/

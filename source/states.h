@@ -1,5 +1,13 @@
+/** @file
+  * @brief Tilstandene med hjelpefunksjoner
+  */
 
 
+/** Enum mulige tilstander
+  *
+  * Dette er de mulige tilstandene for switchen i main.c filen
+  * init vil også være en tilstand, men denne tilstanden vil bare være en tilstand helt i begynnelsen av programmet
+  */
 
 #ifndef QUEUE_H
 #define QUEUE_H
@@ -8,7 +16,7 @@ typedef enum {
 	IDLE,				/// Heisen står stille og venter på ny bestilling
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
 	Go,					/// Heisen beveger seg til en annen bestilling for å betjene denne
-	EMERGENCY			/// Heisen er i et nødstillfelle og kaster alle bestillinger til siden
+	EMERGENCY,		/// Heisen er i et nødstillfelle og kaster alle bestillinger til siden
 } States;
 
 
@@ -36,12 +44,12 @@ void states_goto_floor(int targetFloor);
 
 
 /** @brief Endrer nextState variabelen til state
-  * @param[in] state Tilstanden hesen skal til neste gang states_get_next_state kalles
+  * @param[in] state Tilstanden heisen skal til neste gang states_get_next_state kalles
 */
 void states_set_next_state(States state);
 
 
-/** @brief Kalles for å endre nåhverdne state til til nextState
+/** @brief Kalles for å endre tilstand til nextState
 */
 States states_get_next_state();
 
@@ -49,17 +57,18 @@ States states_get_next_state();
 
 /*
 De følgene funskjonene er alle states som brukes i main.c
-
 */
 
 
 /** @brief State for når heisen står stille og leter etter bestillinger
-*/
+  *
+  */
 void state_idle();
 
 
 /** @brief State for når heisen betjener en bestilling
-*/
+  *
+  */
 void state_stay();
 
 
@@ -75,10 +84,10 @@ void state_emergency();
 
 
 /**
-* @brief Setter heisen i første etasje når programmet begynner, samt skrur av alle etasje command lys.
+* @brief Kjører heisen en etasje ned når programmet starter, samt skrur av alle etasje command lys.
 */
 
-void state_init_elevator();
+void state_init();
 
 /**
 * @brief Sjekker hvilken etasje heisen er i.
@@ -93,3 +102,4 @@ int state_floor_check();
 int state_current_last_floorindicator();
 
 #endif
+
