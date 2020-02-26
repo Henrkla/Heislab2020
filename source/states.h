@@ -1,6 +1,9 @@
 
 
 
+#ifndef QUEUE_H
+#define QUEUE_H
+
 typedef enum {
 	IDLE,				/// Heisen står stille og venter på ny bestilling
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
@@ -76,3 +79,17 @@ void state_emergency();
 */
 
 void state_init_elevator();
+
+/**
+* @brief Sjekker hvilken etasje heisen er i.
+* @return Returnerer etasje-integer. Returnerer -1 hvis mellom etasjer.
+*/
+int state_floor_check();
+
+/*
+* @brief sjekker siste etasje heisen har vært i. Brukes for å gi riktig etasjelys.
+*/
+
+int state_current_last_floorindicator();
+
+#endif
