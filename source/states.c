@@ -29,23 +29,6 @@ void states_set_motor_dir(HardwareMovement movement) {
 	hardware_command_movement(movement);
 }
 
-
-int states_get_next_dest() {
-	states_update_current_floor();
-	if (previusDirection == HARDWARE_MOVEMENT_UP) {
-		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
-		return queue_check_orders_above(currentFloor);
-		return queue_check_orders_below(currentFloor);
-	}
-	else if (previusDirection == HARDWARE_MOVEMENT_DOWN) {
-		return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
-		return queue_check_orders_below(currentFloor);
-		return queue_check_orders_above(currentFloor);
-	}
-	return -1;
-}
-
-
 void states_goto_floor(int targetFloor) {
 	states_update_current_floor();
 	while (currentFloor != targetFloor) {
@@ -71,7 +54,8 @@ STATES states_get_next_state() {
 
 
 void state_idle() {
-	while (states_get_next_dest() == -1) {
+	states_update_current_floor();
+	while (queue_get_next_dest(currentFloor, previusDirection) == -1) {
 		if (queue_check_order_floor(currentFloor) != ORDER_NONE) {
 			states_set_next_state(STAY);
 			}
@@ -85,7 +69,7 @@ void state_stay() {
 	queue_clear_floor(currentFloor);
 	door_open();
 	door_obstruction_check();
-	if (states_get_next_dest() == -1) {
+	if (queue_get_next_dest(currentFloor, previusDirection) == -1) {
 		states_set_next_state(IDLE);
 	}
 	else {
@@ -95,7 +79,7 @@ void state_stay() {
 
 
 void state_run() {
-	int dest = states_get_next_dest();
+	int dest = queue_get_next_dest(currentFloor, previusDirection);
 	states_goto_floor(dest);
 	states_set_next_state(STAY);
 }

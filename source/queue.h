@@ -41,3 +41,52 @@ int queue_same_direction(int floor, HardwareMovement direction);
   * @return bestillingen som ligger i etasjen
 */
 ORDERS queue_check_order_floor(int floor);
+
+
+/** @brief Finner nærmeste bestilling over heisen, uavhengig av motorretning
+  * 
+  * @param[in] currentFloor Etasjen vi er i
+  *
+  * @return Returner den nærmeste bestillingen over heisen.
+*/
+int queue_check_orders_above(int currentFloor);
+
+
+/** @brief Finner nærmeste bestilling under heisen, uavhengig av motorretning
+  *
+  * @param[in] currentFloor Etasjen vi er i
+  *
+  * @return Returner den nærmeste bestillingen under heisen.
+*/
+int queue_check_orders_below(int currentFloor);
+
+
+/** @brief Finner nærmeste bestilling over heisen, sjekker også at bestillingene skal i samme retning som heisen
+  *
+  * @param[in] currentFloor Etasjen vi er i
+  * @param[in] direction Retningen heisen har
+  *
+  * @return Returner den nærmeste bestillingen over heisen som også skal i samme retning.
+*/
+int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction);
+
+
+/** @brief Finner nærmeste bestilling under heisen, sjekker også at bestillingene skal i samme retning som heisen
+  *
+  * @param[in] currentFloor Etasjen vi er i
+  * @param[in] direction Retningen heisen har
+  *
+  * @return Returner den nærmeste bestillingen under heisen som også skal i samme retning.
+*/
+int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction);
+
+
+
+/** @brief Finner ut hvilken bestilling som skal betjenes som neste
+  * 
+  * @param[in] currentFloor her taes inn den nåhverende etasjen
+  * @param[in] prevDirection her taes inn den forrige retningen
+  * 
+  * @return hvilken etasje er neste heisen skal dra til
+*/
+int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection);

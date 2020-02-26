@@ -98,3 +98,17 @@ int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction)
 	}
 }
 
+
+int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection) {
+	if (direction == HARDWARE_MOVEMENT_UP) {
+		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
+		return queue_check_orders_above(currentFloor);
+		return queue_check_orders_below(currentFloor);
+	}
+	else if (direction == HARDWARE_MOVEMENT_DOWN) {
+		return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
+		return queue_check_orders_below(currentFloor);
+		return queue_check_orders_above(currentFloor);
+	}
+	return -1;
+}
