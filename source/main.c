@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <signal.h>
 #include "hardware.h"
-#include "heislogikk.h"
 #include "states.h"
 #include "door.h"
 #include "queue.h"
@@ -24,7 +23,7 @@ int main(){
 
     signal(SIGINT, sigint_handler);
 
-	start_elevator();
+	state_init();
 
 	//
 
