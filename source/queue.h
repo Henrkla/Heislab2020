@@ -12,7 +12,7 @@
   */
 
 /**/
-typedef enum ORDERS{
+typedef enum {
 	ORDER_NONE = -1,						// Ingen Bestilling
 	ORDER_UP = HARDWARE_ORDER_UP,			// Bestilling oppover
 	ORDER_DOWN = HARDWARE_ORDER_DOWN,		// Bestilling Nedover
