@@ -5,6 +5,8 @@
 #include "lights.h"
 #include "door.h"
 
+#define DOOR_DELAY = 3
+
 void start_elevator() {
 	lights_order_emergency_clear_all();
 	while (current_floor() != 0) {
@@ -45,14 +47,21 @@ void stop_button_check_delete() {
 		door_stop_button();
 	}
 	hardware_command_stop_light(0);
-};
+}
+
+void obstruction_check(){
+	while (hardware_read_obstruction_signal() && door_open()) {
+		door_open();
+	}
+}
+;
 
 void timer() {
 	time_t start_time = time(NULL);
 	time_t current_time = time(NULL);
 	double time_used = difftime(current_time, start_time);
 
-	while (time_used) < (3.0) {
+	while (time_used < DOOR_DELAY) {
 
 		if (hardware_read_obstruction_signal() || hardware_read_stop_signal()) {
 			start_time = time(NULL);

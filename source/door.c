@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
-#include "lights.h"
 #include "heislogikk.h"
 #include "door.h"
 
@@ -13,6 +12,6 @@ void door_open() {
 
 void door_stop_button() {
 	if (current_floor() != -1) {
-		door();
+		door_open();
 	}
 };

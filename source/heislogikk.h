@@ -38,12 +38,21 @@ int current_last_floorindicator();
 /**
  * @param Returnerer 1 hvis stoppknappen er trykket.
  */
-int stop_button_pressed;
+
+/*int stop_button_pressed();
+*/
 
 /**
  * @brief Sjekker om stoppknappen er trykket og sletter alle ordre hvis trykket.
  */
 void stop_button_check_delete();
+
+/**
+* @brief Sjekker om obstruksjonsbryteren er på. Holder døren åpen hvis den allerde er åpen. Påvirker ikke systemet om døren er lukket.
+*/
+
+void obstruction_check();
+
 
 /**
  * @brief Tidsinterval for åpen dør. Står på i 3 sekunder. resetter timeren ved når obstruksjon eller stoppknappen er trykket.
