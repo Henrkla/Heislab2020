@@ -54,12 +54,6 @@ void states_set_next_state(STATES state);
 STATES states_get_next_state();
 
 
-
-/*
-De følgene funskjonene er alle states som brukes i main.c
-*/
-
-
 /** @brief State for når heisen står stille og leter etter bestillinger
   *
   */
@@ -84,21 +78,20 @@ void state_emergency();
 
 
 /**
-* @brief Kjører heisen en etasje ned når programmet starter, samt skrur av alle etasje command lys.
+* @brief State for når programmet akkuratt startet. Kjører ned en etasje og skifter til IDLE.
 */
-
 void state_init();
 
-/**
-* @brief Sjekker hvilken etasje heisen er i.
-* @return Returnerer etasje-integer. Returnerer -1 hvis mellom etasjer.
-*/
+/** @brief Sjekker hvilken etasje heisen er i.
+  * 
+  * @return Returnerer etasje-integer. Returnerer -1 hvis mellom etasjer.
+  */
 int state_floor_check();
 
-/*
-* @brief sjekker siste etasje heisen har vært i. Brukes for å gi riktig etasjelys.
-*/
-
+/** @brief sjekker siste etasje heisen har vært i. Brukes for å gi riktig etasjelys.
+  * 
+  * @return Returner etasje-integer. Returnerer siste etasje hvis mellom etasjer.
+  */
 int state_current_last_floorindicator();
 
 #endif
