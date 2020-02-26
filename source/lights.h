@@ -1,10 +1,13 @@
 
+#ifndef LIGHTS_H
+#define LIGHTS_H
+
+#include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
 #include "door.h"
 
-#ifndef LIGHTS_H
-#define LIGHTS_H
+
 
 /**
 * @brief Setter etasje lys

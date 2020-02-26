@@ -1,12 +1,13 @@
 
+#ifndef DOOR_H
+#define DOOR_H
+
 #include <stdlib.h>
+#include <stdio.h>
 #include "hardware.h"
 #include "lights.h"
 
 #define DOOR_DELAY = 3
-
-#ifndef DOOR_H
-#define DOOR_H
 
 /*
 * @brief Åpner dør og setter på dørlys.

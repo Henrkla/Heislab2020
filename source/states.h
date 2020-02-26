@@ -20,20 +20,12 @@
   * init vil også være en tilstand, men denne tilstanden vil bare være en tilstand helt i begynnelsen av programmet
   */
 
-
 typedef enum {
 	IDLE,				/// Heisen står stille og venter på ny bestilling
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
 	Go,					/// Heisen beveger seg til en annen bestilling for å betjene denne
 	EMERGENCY,		/// Heisen er i et nødstillfelle og kaster alle bestillinger til siden
 } STATES;
-
-
-/** @brief Oppdaterer currentFloor variabelen til riktig etasje, -1 mellom etasjer
-*/
-void states_update_current_floor();
-
-
 
 /** @brief Setter motorretning i hardware filen, endrer også currentDirection og previusDirection variablene
 */
@@ -101,7 +93,7 @@ int state_floor_check();
   * 
   * @return Returner etasje-integer. Returnerer siste etasje hvis mellom etasjer.
   */
-int state_current_last_floorindicator();
+int states_update_current_floor();
 
 #endif
 

@@ -1,6 +1,8 @@
+
+#include <stdio.h>
+#include <stdlib.h>
 #include "hardware.h"
 #include "states.h"
-
 #include "queue.h"
 #include "lights.h"
 #include "door.h"
@@ -16,10 +18,6 @@ static int previusDirection = HARDWARE_MOVEMENT_STOP;
 static STATES nextState = IDLE;
 
 
-
-void states_update_current_floor() {
-	currentFloor = state_current_last_floorindicator();
-}
 
 void states_set_motor_dir(HardwareMovement movement) {
 	currentDirection = movement;
@@ -117,7 +115,7 @@ int state_floor_check() {
 	return -1;
 };
 
-void state_current_last_floorindicator() {
+void states_update_current_floor(); {
 	if (state_floor_check() != -1) {
 		currentFloor = state_floor_check();
 	}
