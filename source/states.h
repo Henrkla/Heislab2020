@@ -21,12 +21,12 @@
   */
 
 
-typedef enum {
+typedef enum STATES {
 	IDLE,				/// Heisen står stille og venter på ny bestilling
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
 	Go,					/// Heisen beveger seg til en annen bestilling for å betjene denne
 	EMERGENCY,		/// Heisen er i et nødstillfelle og kaster alle bestillinger til siden
-} STATES;
+};
 
 
 /** @brief Oppdaterer currentFloor variabelen til riktig etasje, -1 mellom etasjer
