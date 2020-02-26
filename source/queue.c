@@ -5,7 +5,7 @@
 #define BETWEEN_FLOORS -1
 #define NUMBER_OF_BUTTONS 3
 
-static ORDERS orders[HARDWARE_NUMBER_OF_FLOORS];
+static ORDER orders[HARDWARE_NUMBER_OF_FLOORS];
 
 int queue_check_multiple_orders(int floor) {
 	if (hardware_read_order(floor, HARDWARE_ORDER_UP) && hardware_read_order(floor, HARDWARE_ORDER_DOWN)) {
@@ -45,7 +45,7 @@ void queue_clear_all_floors() {
 }
 
 int queue_same_direction(int floor, HardwareMovement direction) {
-	if (order[floor] == HARDWARE_ORDER_INSIDE) {
+	if (orders[floor] == HARDWARE_ORDER_INSIDE) {
 		return 1;
 	}	
 	else if	((direction == HARDWARE_MOVEMENT_DOWN)  &&   (orders[floor] == HARDWARE_ORDER_DOWN)) {
@@ -59,7 +59,7 @@ int queue_same_direction(int floor, HardwareMovement direction) {
 	}
 }
 
-ORDERS queue_check_order_floor(int floor) {
+ORDER queue_check_order_floor(int floor) {
 	return orders[floor];
 }
 // returnerer 3 og 4 eller bare 3?
