@@ -12,7 +12,7 @@
   */
 
 /**/
-typedef enum ORDERS{
+typedef enum {
 	ORDER_NONE = -1,						// Ingen Bestilling
 	ORDER_UP = HARDWARE_ORDER_UP,			// Bestilling oppover
 	ORDER_DOWN = HARDWARE_ORDER_DOWN,		// Bestilling Nedover
@@ -49,7 +49,7 @@ int queue_same_direction(int floor, HardwareMovement direction);
   * @param[in] floor etasjen som skal sjekkes
   * @return bestillingen som ligger i etasjen
 */
-ORDERS queue_check_order_floor(int floor);
+ORDER queue_check_order_floor(int floor);
 
 
 /** @brief Finner nærmeste bestilling over heisen, uavhengig av motorretning

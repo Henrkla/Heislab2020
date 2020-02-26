@@ -62,7 +62,7 @@ int queue_same_direction(int floor, HardwareMovement direction) {
 ORDER queue_check_order_floor(int floor) {
 	return orders[floor];
 }
-// returnerer 3 og 4 eller bare 3?
+
 
 int queue_check_orders_above(int currentFloor) {
 	for (int floor = currentFloor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
