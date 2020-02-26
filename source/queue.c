@@ -63,9 +63,10 @@ ORDERS queue_check_order_floor(int floor) {
 	return orders[floor];
 }
 // returnerer 3 og 4 eller bare 3?
-int queue_check_orders_above(int currentFloor, HardwareMovement direction) {
+
+int queue_check_orders_above(int currentFloor) {
 	for (int floor = currentFloor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-		if ((queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction)) {
+		if (queue_check_order_floor(floor) != ORDER_NONE) {
 			return floor;
 		}
 	}
@@ -74,6 +75,23 @@ int queue_check_orders_above(int currentFloor, HardwareMovement direction) {
 int queue_check_orders_below(int currentFloor) {
 	for (int floor = currentFloor; floor >= 0; floor--) {
 		if (queue_check_order_floor(floor) != ORDER_NONE) {
+			return floor;
+		}
+	}
+}
+
+
+int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction) {
+	for (int floor = currentFloor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+		if ((queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction))) {
+			return floor;
+		}
+	}
+}
+
+int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction) {
+	for (int floor = currentFloor; floor >= 0; floor--) {
+		if (queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction))) {
 			return floor;
 		}
 	}

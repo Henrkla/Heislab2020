@@ -1,6 +1,9 @@
 #include "hardware.h"
 #include "states.h"
+
 #include "queue.h"
+#include "lights.h"
+#include "door.h"
 
 
 #define BEETWEEN_FLOORS -1
@@ -10,6 +13,9 @@ static int nextFloor = BEETWEEN_FLOORS;
 
 static int currentDirection = HARDWARE_MOVEMENT_STOP;
 static int previusDirection = HARDWARE_MOVEMENT_STOP;
+
+static States nextState = IDLE;
+
 
 
 // floor check
@@ -27,19 +33,18 @@ void states_set_motor_dir(HardwareMovement movement) {
 }
 
 
-
 int states_get_next_dest() {
+	states_update_current_floor();
 	if (previusDirection == HARDWARE_MOVEMENT_UP) {
-		return queue_check_orders_above;
-		return queue_check_orders_below;
+		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
+		return queue_check_orders_below_motor(current_floor, HARDWARE_MOVEMENT_UP);
 	}
 	else if (previusDirection == HARDWARE_MOVEMENT_DOWN) {
-		return queue_check_orders_below;
-		return queue_check_orders_above;
+		return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
+		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
 	}
 	return -1;
 }
-
 
 
 void states_goto_floor(int targetFloor) {
@@ -56,6 +61,44 @@ void states_goto_floor(int targetFloor) {
 }
 
 
+void states_set_next_state(States state) {
+	nextState = state;
+}
+
+States states_get_next_state() {
+	return nextState;
+}
+
+
+
+void state_idle() {
+	while (states_get_next_dest() == -1) {
+		if (queue_check_order_floor(currentFloor) != ORDER_NONE) {
+			states_set_next_state(STAY);
+			}
+		}
+	states_set_next_state(RUN);
+}
+
+
+void state_stay() {
+	//lights clear floor
+	queue_clear_floor(currentFloor);
+	door_open(); // denne funksjonen trenger obstruction logikk
+	if (states_get_next_dest() == -1) {
+		states_set_next_state(IDLE);
+	}
+	else {
+		states_set_next_state(RUN);
+	}
+}
+
+
+void state_run() {
+	int dest = states_get_next_dest();
+	states_goto_floor(dest);
+
+}
 
 
 
@@ -67,8 +110,7 @@ void states_goto_floor(int targetFloor) {
 
 
 
-
-
+/*
 void states_init() {
 	int error = hardware_init();
 	if (error != 0) {
@@ -83,3 +125,4 @@ void states_init() {
 	}
 
 }
+*/

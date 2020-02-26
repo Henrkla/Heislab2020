@@ -34,3 +34,10 @@ void queue_clear_all_floors();
   * @return Om vi skal stoppe eller ikke (t/f) = (1/0)
   */
 int queue_same_direction(int floor, HardwareMovement direction);
+
+
+/** @brief finner hvilken bestilling som ligger i en spesefikk etasje
+  * @param[in] floor etasjen som skal sjekkes
+  * @return bestillingen som ligger i etasjen
+*/
+ORDERS queue_check_order_floor(int floor);
