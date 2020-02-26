@@ -15,7 +15,7 @@ static int currentFloor = BEETWEEN_FLOORS;
 static int currentDirection = HARDWARE_MOVEMENT_STOP;
 static int previusDirection = HARDWARE_MOVEMENT_STOP;
 
-static STATES nextState = IDLE;
+static STATE nextState = IDLE;
 
 
 
@@ -41,12 +41,12 @@ void states_goto_floor(int targetFloor) {
 }
 
 
-void states_set_next_state(STATES state) {
+void states_set_next_state(STATE state) {
 	nextState = state;
 }
 
 
-STATES states_get_next_state() {
+STATE states_get_next_state() {
 	return nextState;
 }
 
