@@ -18,54 +18,60 @@ int queue_check_multiple_orders(int floor) {
 	else {
 		return 0;
 	}
-}
+};
 
 void queue_fetch_button_inputs() {
-	 for(int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++){
-		 for (int button = HARDWARE_ORDER_UP; button <= HARDWARE_ORDER_DOWN; button++) {
-			 if (hardware_read_order(floor, button) && queue_check_multiple_orders(floor)) {
-				 orders[floor] = HARDWARE_ORDER_INSIDE;
-			 }
-			 else if (hardware_read_order(floor, button) && !(queue_check_multiple_orders(floor))){
-				 orders[floor] = button;
-			 }
-			 else {
-				 orders[floor] = ORDER_NONE;
-			 }
-		 }
-       
+	for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
+		for (int button = HARDWARE_ORDER_UP; button <= HARDWARE_ORDER_DOWN; button++) {
+			if (hardware_read_order(floor, button) && queue_check_multiple_orders(floor)) {
+				orders[floor] = HARDWARE_ORDER_INSIDE;
+			}
+			else if (hardware_read_order(floor, button) && !(queue_check_multiple_orders(floor))) {
+				orders[floor] = button;
+			}
+			else {
+				orders[floor] = ORDER_NONE;
+			}
+		}
 	}
-
-}
+};
 
 void queue_clear_floor(int floor) {
 	orders[floor] = ORDER_NONE;
-}
+};
 
 void queue_clear_all_floors() {
 	for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
 		queue_clear_floor(floor);
 	}
-}
+};
+
+/*
+* gcc er ikke spesielt happy når vi sammenligner to enums "(orders[floor] == HARDWARE_ORDER_DOWN)", og flagger dette som en feil. Mulig vi må finne en bedre måte å gjøre dette på, men er mulig å fjerne flagget som sier det er feil.
+*/
 
 int queue_same_direction(int floor, HardwareMovement direction) {
 	if (orders[floor] == HARDWARE_ORDER_INSIDE) {
 		return 1;
-	}	
-	else if	((direction == HARDWARE_MOVEMENT_DOWN)  &&   (orders[floor] == HARDWARE_ORDER_DOWN)) {
+	}
+	else if ((direction == HARDWARE_MOVEMENT_DOWN) && (orders[floor] == HARDWARE_ORDER_DOWN)) {
 		return 1;
 	}
-	else if ((direction == HARDWARE_MOVEMENT_UP) && (orders[floor] == HARDWARE_ORDER_UP) || (orders[floor])) {
+	else if (((direction == HARDWARE_MOVEMENT_UP) && (orders[floor] == HARDWARE_ORDER_UP)) || (orders[floor])) {
 		return 1;
 	}
 	else {
 		return 0;
 	}
-}
+};
 
 ORDER queue_check_order_floor(int floor) {
 	return orders[floor];
-}
+};
+
+/*
+* La til return 0; på alle int funksjoner under. (unntatt den som returnerer -1)
+*/
 
 
 int queue_check_orders_above(int currentFloor) {
@@ -74,7 +80,8 @@ int queue_check_orders_above(int currentFloor) {
 			return floor;
 		}
 	}
-}
+	return 0;
+};
 
 int queue_check_orders_below(int currentFloor) {
 	for (int floor = currentFloor; floor >= 0; floor--) {
@@ -82,7 +89,8 @@ int queue_check_orders_below(int currentFloor) {
 			return floor;
 		}
 	}
-}
+	return 0;
+};
 
 
 int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction) {
@@ -91,6 +99,7 @@ int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction)
 			return floor;
 		}
 	}
+	return 0;
 }
 
 
@@ -100,19 +109,23 @@ int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction)
 			return floor;
 		}
 	}
-}
+	return 0;
+};
 
+/*
+* Tar inn prevDirection, men bruker (direction == HARDWARE_MOVEMENT_XX) -> endrer til (prevDirection == HARDWARE_MOVEMENT_XX)
+*/
 
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection) {
-	if (direction == HARDWARE_MOVEMENT_UP) {
+	if (prevDirection == HARDWARE_MOVEMENT_UP) {
 		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
 		return queue_check_orders_above(currentFloor);
 		return queue_check_orders_below(currentFloor);
 	}
-	else if (direction == HARDWARE_MOVEMENT_DOWN) {
+	else if (prevDirection == HARDWARE_MOVEMENT_DOWN) {
 		return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
 		return queue_check_orders_below(currentFloor);
 		return queue_check_orders_above(currentFloor);
 	}
 	return -1;
-}
+};

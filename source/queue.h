@@ -11,8 +11,7 @@
   *@brief Tar input signalene til knappene og legger dem inn i et array
   */
 
-/**/
-typedef enum {
+typedef enum ORDERS {
 	ORDER_NONE = -1,						// Ingen Bestilling
 	ORDER_UP = HARDWARE_ORDER_UP,			// Bestilling oppover
 	ORDER_DOWN = HARDWARE_ORDER_DOWN,		// Bestilling Nedover
@@ -87,7 +86,7 @@ int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction)
   *
   * @return Returner den nærmeste bestillingen under heisen som også skal i samme retning.
 */
-int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction);
+int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction);
 
 
 

@@ -7,8 +7,6 @@
 #include "hardware.h"
 #include "door.h"
 
-
-
 /**
 * @brief Setter etasje lys
 */
@@ -25,6 +23,6 @@ void lights_reset_floor(int floor);
 * @brief Rester alle lysene ved emergency
 */
 
-void lights_emergency_clear_all()
+void lights_order_emergency_clear_all();
 
 #endif
