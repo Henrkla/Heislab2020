@@ -13,7 +13,7 @@ static int currentFloor = BEETWEEN_FLOORS;
 static int currentDirection = HARDWARE_MOVEMENT_STOP;
 static int previusDirection = HARDWARE_MOVEMENT_STOP;
 
-static States nextState = IDLE;
+static STATES nextState = IDLE;
 
 
 
@@ -60,12 +60,12 @@ void states_goto_floor(int targetFloor) {
 }
 
 
-void states_set_next_state(States state) {
+void states_set_next_state(STATES state) {
 	nextState = state;
 }
 
 
-States states_get_next_state() {
+STATES states_get_next_state() {
 	return nextState;
 }
 
@@ -116,13 +116,12 @@ void state_emergency() {
 
 void state_init() {
 	lights_order_emergency_clear_all();
+	queue_clear_all_floors();
 	while (state_floor_check() = -1) {
-		hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-		lights_floor_indicator();
+		states_set_motor_dir(HARDWARE_MOVEMENT_DOWN);
 	}
-	save_direction = direction;
-	direction = HARDWARE_MOVEMENT_STOP;
-	hardware_command_movement(direction);
+	states_set_motor_dir(HARDWARE_MOVEMENT_STOP);
+	states_set_next_state(IDLE);
 };
 
 int state_floor_check() {

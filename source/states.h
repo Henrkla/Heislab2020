@@ -17,7 +17,7 @@ typedef enum {
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
 	Go,					/// Heisen beveger seg til en annen bestilling for å betjene denne
 	EMERGENCY,		/// Heisen er i et nødstillfelle og kaster alle bestillinger til siden
-} States;
+} STATES;
 
 
 /** @brief Oppdaterer currentFloor variabelen til riktig etasje, -1 mellom etasjer
@@ -46,12 +46,12 @@ void states_goto_floor(int targetFloor);
 /** @brief Endrer nextState variabelen til state
   * @param[in] state Tilstanden heisen skal til neste gang states_get_next_state kalles
 */
-void states_set_next_state(States state);
+void states_set_next_state(STATES state);
 
 
 /** @brief Kalles for å endre tilstand til nextState
 */
-States states_get_next_state();
+STATES states_get_next_state();
 
 
 
