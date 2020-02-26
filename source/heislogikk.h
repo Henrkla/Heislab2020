@@ -17,11 +17,6 @@
 #include "door.h"
 
 
-/**
-* @brief Setter heisen i første etasje når programmet begynner, samt skrur av alle etasje command lys.
-*/
-
-void start_elevator();
 
 /**
  * @brief Sjekker hvilken etasje heisen er i.

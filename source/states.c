@@ -21,7 +21,7 @@ static States nextState = IDLE;
 // floor check
 // viktig at dette ikke er -1
 void states_update_current_floor() {
-	currentFloor = // floor check
+	currentFloor = current_last_floorindicator();
 }
 
 void states_set_motor_dir(HardwareMovement movement) {
@@ -86,7 +86,8 @@ void state_idle() {
 void state_stay() {
 	lights_reset_floor(currentFloor)
 	queue_clear_floor(currentFloor);
-	door_open(); // denne funksjonen trenger obstruction logikk
+	door_open();
+	obstruction_check();
 	if (states_get_next_dest() == -1) {
 		states_set_next_state(IDLE);
 	}
@@ -112,10 +113,20 @@ void state_emergency() {
 		door_stop_button();
 	}
 	hardware_command_stop_light(0);
+	states_set_next_state(IDLE);
 }
 
 
-
+void state_init_elevator() {
+	lights_order_emergency_clear_all();
+	while (floor_check() = -1) {
+		hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
+		lights_floor_indicator();
+	}
+	save_direction = direction;
+	direction = HARDWARE_MOVEMENT_STOP;
+	hardware_command_movement(direction);
+};
 
 
 

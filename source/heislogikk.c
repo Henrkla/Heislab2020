@@ -7,16 +7,7 @@
 
 #define DOOR_DELAY = 3
 
-void start_elevator() {
-	lights_order_emergency_clear_all();
-	while (current_floor() != 0) {
-		hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
-		lights_floor_indicator();
-	}
-	save_direction = direction;
-	direction = HARDWARE_MOVEMENT_STOP;
-	hardware_command_movement(direction);
-};
+
 
 int floor_check() {
 	for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
@@ -44,7 +35,6 @@ void stop_button_check_delete() {
 		hardware_command_movement(direction);
 		queue_clear_all_floors();
 		hardware_command_stop_light(1);
-		door_stop_button();
 	}
 	hardware_command_stop_light(0);
 }

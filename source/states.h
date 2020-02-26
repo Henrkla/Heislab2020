@@ -70,3 +70,9 @@ void state_run();
 */
 void state_emergency();
 
+
+/**
+* @brief Setter heisen i første etasje når programmet begynner, samt skrur av alle etasje command lys.
+*/
+
+void state_init_elevator();
