@@ -1,3 +1,12 @@
+
+
+#ifndef QUEUE_H
+#define QUEUE_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "hardware.h"
+
 /**@file
   *@brief Tar input signalene til knappene og legger dem inn i et array
   */
@@ -90,3 +99,7 @@ int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction)
   * @return hvilken etasje er neste heisen skal dra til
 */
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection);
+
+
+#endif
+
