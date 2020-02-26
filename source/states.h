@@ -20,12 +20,17 @@
   * init vil også være en tilstand, men denne tilstanden vil bare være en tilstand helt i begynnelsen av programmet
   */
 
+<<<<<<< HEAD
 typedef enum {
+=======
+
+typedef enum STATES {
+>>>>>>> ec46f559fde9a91cf86122d82a06a8b5b106a49a
 	IDLE,				/// Heisen står stille og venter på ny bestilling
 	STAY,				/// Heisen står stille i en etajse og håndterer en bestilling
 	Go,					/// Heisen beveger seg til en annen bestilling for å betjene denne
 	EMERGENCY,		/// Heisen er i et nødstillfelle og kaster alle bestillinger til siden
-} STATES;
+};
 
 /** @brief Setter motorretning i hardware filen, endrer også currentDirection og previusDirection variablene
 */
