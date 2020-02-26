@@ -11,8 +11,7 @@ void lights_floor_indicator() {
 
 }
 
-void lights_reset_floor() {
-	int floor = current_floor();
+void lights_reset_floor(int floor) {
 	hardware_command_order_light(floor, HARDWARE_ORDER_UP, 0);
 	hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, 0);
 	hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 0);
