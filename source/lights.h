@@ -1,7 +1,6 @@
-#include <stdio.h>
+
 #include <stdlib.h>
 #include "hardware.h"
-#include "heislogikk.h"
 #include "door.h"
 
 #ifndef LIGHTS_H

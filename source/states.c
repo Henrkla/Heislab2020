@@ -117,14 +117,10 @@ int state_floor_check() {
 	return -1;
 };
 
-int state_current_last_floorindicator() {
-	int currentlastfloor = f;
-		if state_floor_check() != -1 {
-			currentlastfloor = state_floor_check();
-		else
-			return f;
-		}
-	return f;
+void state_current_last_floorindicator() {
+	if (state_floor_check() != -1) {
+		currentFloor = state_floor_check();
+	}
 }
 
 

@@ -1,7 +1,6 @@
-#include <stdio.h>
+
 #include <stdlib.h>
 #include "hardware.h"
-#include "heislogikk.h"
 #include "lights.h"
 
 #define DOOR_DELAY = 3
