@@ -14,13 +14,6 @@ void door_open() {
 	currentDoorState = DOOR_CLOSED;
 };
 
-int door_check_open() {
-	if hardware_command_door_open() = 1 {
-		return 1;
-	}
-	return 0;
-}
-
 void door_stop_button() {
 	if (state_floor_check() != -1) {
 		door_open();

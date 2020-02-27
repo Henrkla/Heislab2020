@@ -12,7 +12,7 @@
 #include "lights.h"
 #include "states.h"
 
-#define DOOR_DELAY = 3
+#define DOOR_DELAY 3
 
 
 /**@brief Enum that keeps track on the door is open or not
