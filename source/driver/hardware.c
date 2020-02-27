@@ -120,8 +120,7 @@ int hardware_read_floor_sensor(int floor){
 }
 
 int hardware_read_order(int floor, HardwareOrder order_type){
-	for (int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++) {
-		if (hardware_read_order(f, HARDWARE_ORDER_INSIDE)) {
+    if(!hardware_legal_floor(floor, order_type)){
         return 0;
     }
 
@@ -135,9 +134,7 @@ int hardware_read_order(int floor, HardwareOrder order_type){
     int type_bit = hardware_order_type_bit(order_type);
 
     return io_read_bit(order_bit_lookup[floor][type_bit]);
-    }
 }
-
 
 void hardware_command_door_open(int door_open){
     if(door_open){
@@ -194,8 +191,6 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
         io_clear_bit(light_bit_lookup[floor][type_bit]);
     }
 }
-
-
 
 int hardware_floor_check() {
 	for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
