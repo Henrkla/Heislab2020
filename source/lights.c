@@ -20,3 +20,12 @@ void lights_order_emergency_clear_all() {
 		lights_reset_floor(i);
 	}
 }
+
+int lights_floor_check() {
+	for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
+		if (hardware_read_floor_sensor(i)) {
+			return i;
+		}
+	}
+	return -1;
+}

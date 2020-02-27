@@ -80,12 +80,6 @@ void state_emergency();
 */
 void state_init();
 
-/** @brief Sjekker hvilken etasje heisen er i.
-  * 
-  * @return Returnerer etasje-integer. Returnerer -1 hvis mellom etasjer.
-  */
-int state_floor_check();
-
 /** @brief sjekker siste etasje heisen har vært i. Brukes for å gi riktig etasjelys.
   * 
   * @return Returner etasje-integer. Returnerer siste etasje hvis mellom etasjer.

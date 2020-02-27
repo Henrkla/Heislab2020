@@ -25,4 +25,10 @@ void lights_reset_floor(int floor);
 
 void lights_order_emergency_clear_all();
 
+/**
+* @brief Sjekker etasje, returnerer -1 mellom etasjer.
+*/
+
+int lights_floor_check();
+
 #endif
