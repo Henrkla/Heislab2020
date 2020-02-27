@@ -51,13 +51,13 @@ void queue_clear_all_floors() {
 */
 
 int queue_same_direction(int floor, HardwareMovement direction) {
-	if (orders[floor] == HARDWARE_ORDER_INSIDE) {
+	if (orders[floor] == ORDER_INSIDE) {
 		return 1;
 	}
-	else if ((direction == HARDWARE_MOVEMENT_DOWN) && (orders[floor] == HARDWARE_ORDER_DOWN)) {
+	else if ((direction == HARDWARE_MOVEMENT_DOWN) && (orders[floor] == ORDER_DOWN)) {
 		return 1;
 	}
-	else if (((direction == HARDWARE_MOVEMENT_UP) && (orders[floor] == HARDWARE_ORDER_UP)) || (orders[floor])) {
+	else if (((direction == HARDWARE_MOVEMENT_UP) && (orders[floor] == ORDER_UP)) || (orders[floor])) {
 		return 1;
 	}
 	else {
