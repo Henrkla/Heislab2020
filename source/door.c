@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "door.h"
-#include "states.h"
+
+static DOOR_STATE currentDoorState = DOOR_CLOSED;
 
 void door_open() {
 	hardware_command_door_open(1);
+	currentDoorState = DOOR_OPEN;
 	door_timer();
 	hardware_command_door_open(0);
+	currentDoorState = DOOR_CLOSED;
 };
 
 void door_stop_button() {
@@ -18,7 +21,7 @@ void door_stop_button() {
 
 
 void door_obstruction_check() {
-	while (hardware_read_obstruction_signal() && door_open()) {
+	while (hardware_read_obstruction_signal() && currentDoorState ==DOOR_OPEN) {
 		door_open();
 	}
 }

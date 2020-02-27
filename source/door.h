@@ -10,6 +10,17 @@
 
 #define DOOR_DELAY = 3
 
+
+/**@brief Enum that keeps track on the door is open or not
+  *
+  *
+  */
+typedef enum {
+	DOOR_OPEN,			// Door is open
+	DOOR_CLOSED			// Door is closed
+} DOOR_STATE;
+
+
 /*
 * @brief Åpner dør og setter på dørlys.
 */
