@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "door.h"
+#include "states.h"
 
 void door_open() {
 	hardware_command_door_open(1);

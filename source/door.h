@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "hardware.h"
 #include "lights.h"
+#include "states.h"
 
 #define DOOR_DELAY = 3
 
