@@ -1,9 +1,13 @@
+/** @file
+* @brief Dørfunksjoner
+*/
 
 #ifndef DOOR_H
 #define DOOR_H
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "hardware.h"
 #include "lights.h"
 #include "states.h"

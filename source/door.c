@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "hardware.h"
 #include "door.h"
 #include "states.h"
@@ -9,6 +10,13 @@ void door_open() {
 	door_timer();
 	hardware_command_door_open(0);
 };
+
+int door_check_open() {
+	if hardware_command_door_open() = 1 {
+		return 1;
+	}
+	return 0;
+}
 
 void door_stop_button() {
 	if (state_floor_check() != -1) {
