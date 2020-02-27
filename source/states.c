@@ -63,7 +63,7 @@ void state_idle() {
 
 
 void state_stay() {
-	lights_reset_floor(currentFloor)
+	lights_reset_floor(currentFloor);
 	queue_clear_floor(currentFloor);
 	door_open();
 	door_obstruction_check();
@@ -99,7 +99,7 @@ void state_emergency() {
 void state_init() {
 	lights_order_emergency_clear_all();
 	queue_clear_all_floors();
-	while (state_floor_check() = -1) {
+	while (state_floor_check() == -1) {
 		states_set_motor_dir(HARDWARE_MOVEMENT_DOWN);
 	}
 	states_set_motor_dir(HARDWARE_MOVEMENT_STOP);
