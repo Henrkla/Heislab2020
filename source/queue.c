@@ -22,9 +22,9 @@ int queue_check_multiple_orders(int floor) {
 
 void queue_fetch_button_inputs() {
 	for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-		for (int button = HARDWARE_ORDER_UP; button <= HARDWARE_ORDER_DOWN; button++) {
+		for (int button = ORDER_UP; button <= ORDER_DOWN; button++) {
 			if (hardware_read_order(floor, button) && queue_check_multiple_orders(floor)) {
-				orders[floor] = HARDWARE_ORDER_INSIDE;
+				orders[floor] = ORDER_INSIDE;
 			}
 			else if (hardware_read_order(floor, button) && !(queue_check_multiple_orders(floor))) {
 				orders[floor] = button;
