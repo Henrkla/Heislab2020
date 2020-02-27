@@ -74,7 +74,6 @@ void state_run();
 */
 void state_emergency();
 
-
 /**
 * @brief State for når programmet akkuratt startet. Kjører ned en etasje og skifter til IDLE.
 */

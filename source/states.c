@@ -99,26 +99,17 @@ void state_emergency() {
 void state_init() {
 	lights_order_emergency_clear_all();
 	queue_clear_all_floors();
-	while (state_floor_check() == -1) {
+	while (lights_floor_check() == -1) {
 		states_set_motor_dir(HARDWARE_MOVEMENT_DOWN);
 	}
 	states_set_motor_dir(HARDWARE_MOVEMENT_STOP);
 	states_set_next_state(IDLE);
 };
 
-int state_floor_check() {
-	for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
-		if (hardware_read_floor_sensor(i)) {
-			return i;
-		}
-	}
-	return -1;
-}
-
 
 void states_update_current_floor() {
-	if (state_floor_check() != -1) {
-		currentFloor = state_floor_check();
+	if (lights_floor_check() != -1) {
+		currentFloor = lights_floor_check();
 	}
 }
 

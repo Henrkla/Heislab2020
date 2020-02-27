@@ -31,4 +31,10 @@ void lights_order_emergency_clear_all();
 
 int lights_floor_check();
 
+/**
+* @brief Returnerer siste etasje heisen har vært.
+*/
+
+int lights_update_current_floor();
+
 #endif

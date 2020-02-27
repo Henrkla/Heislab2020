@@ -5,7 +5,7 @@
 #include "door.h"
 
 void lights_floor_indicator() {
-	int floor = states_update_current_floor();
+	int floor = lights_update_current_floor();
 	hardware_command_floor_indicator_on(floor);
 }
 
@@ -29,3 +29,8 @@ int lights_floor_check() {
 	}
 	return -1;
 }
+
+int lights_update_current_floor() {
+	return 0;
+}
+	;
