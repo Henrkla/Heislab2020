@@ -2,8 +2,15 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "door.h"
+#include "lights.h"
+#include <time.h>
 
 static DOOR_STATE currentDoorState = DOOR_CLOSED;
+
+
+void set_door_state(DOOR_STATE door_state){
+	currentDoorState = door_state;
+}
 
 void door_open() {
 	hardware_command_door_open(1);
@@ -14,7 +21,7 @@ void door_open() {
 };
 
 void door_stop_button() {
-	if (state_floor_check() != -1) {
+	if (hardware_floor_check() != -1) {
 		door_open();
 	}
 };

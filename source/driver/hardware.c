@@ -135,7 +135,9 @@ int hardware_read_order(int floor, HardwareOrder order_type){
     int type_bit = hardware_order_type_bit(order_type);
 
     return io_read_bit(order_bit_lookup[floor][type_bit]);
+    }
 }
+
 
 void hardware_command_door_open(int door_open){
     if(door_open){
@@ -191,4 +193,15 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
     else{
         io_clear_bit(light_bit_lookup[floor][type_bit]);
     }
+}
+
+
+
+int hardware_floor_check() {
+	for (int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++) {
+		if (hardware_read_floor_sensor(i)) {
+			return i;
+		}
+	}
+	return -1;
 }

@@ -99,7 +99,7 @@ void state_emergency() {
 void state_init() {
 	lights_order_emergency_clear_all();
 	queue_clear_all_floors();
-	while (lights_floor_check() == -1) {
+	while (hardware_floor_check() == -1) {
 		states_set_motor_dir(HARDWARE_MOVEMENT_DOWN);
 	}
 	states_set_motor_dir(HARDWARE_MOVEMENT_STOP);
@@ -108,8 +108,8 @@ void state_init() {
 
 
 void states_update_current_floor() {
-	if (lights_floor_check() != -1) {
-		currentFloor = lights_floor_check();
+	if (hardware_floor_check() != -1) {
+		currentFloor = hardware_floor_check();
 	}
 }
 
