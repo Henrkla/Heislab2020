@@ -47,7 +47,7 @@ void queue_clear_all_floors() {
 };
 
 /*
-* gcc er ikke spesielt happy når vi sammenligner to enums "(orders[floor] == HARDWARE_ORDER_DOWN)", og flagger dette som en feil. Mulig vi må finne en bedre måte å gjøre dette på, men er mulig å fjerne flagget som sier det er feil.
+* gcc er ikke spesielt happy nï¿½r vi sammenligner to enums "(orders[floor] == HARDWARE_ORDER_DOWN)", og flagger dette som en feil. Mulig vi mï¿½ finne en bedre mï¿½te ï¿½ gjï¿½re dette pï¿½, men er mulig ï¿½ fjerne flagget som sier det er feil.
 */
 
 int queue_same_direction(int floor, HardwareMovement direction) {
@@ -70,7 +70,7 @@ ORDER queue_check_order_floor(int floor) {
 };
 
 /*
-* La til return 0; på alle int funksjoner under. (unntatt den som returnerer -1)
+* La til return 0; pï¿½ alle int funksjoner under. (unntatt den som returnerer -1)
 */
 
 
@@ -103,7 +103,7 @@ int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction)
 }
 
 
-int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction) {
+int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction) {
 	for (int floor = currentFloor; floor >= 0; floor--) {
 		if ((queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction))) {
 			return floor;
@@ -112,9 +112,6 @@ int queue_check_orders_below_motot(int currentFloor, HardwareMovement direction)
 	return 0;
 };
 
-/*
-* Tar inn prevDirection, men bruker (direction == HARDWARE_MOVEMENT_XX) -> endrer til (prevDirection == HARDWARE_MOVEMENT_XX)
-*/
 
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection) {
 	if (prevDirection == HARDWARE_MOVEMENT_UP) {
