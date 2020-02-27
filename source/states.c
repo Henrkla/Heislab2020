@@ -8,7 +8,7 @@
 #include "door.h"
 
 
-#define BEETWEEN_FLOORS -1
+#define BEETWEEN_FLOORS 0
 
 static int currentFloor = BEETWEEN_FLOORS;
 
@@ -63,6 +63,7 @@ void state_idle() {
 
 
 void state_stay() {
+	hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 	lights_reset_floor(currentFloor);
 	queue_clear_floor(currentFloor);
 	door_open();
@@ -104,6 +105,7 @@ void state_init() {
 	}
 	states_set_motor_dir(HARDWARE_MOVEMENT_STOP);
 	states_set_next_state(IDLE);
+	states_update_current_floor();
 };
 
 

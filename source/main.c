@@ -15,7 +15,7 @@ static void sigint_handler(int sig) {
 }
 
 int main() {
-    printf("Program starts");
+    printf("Program starts\n\r");
 	int error = hardware_init();
     if(error != 0){
         fprintf(stderr, "Unable to initialize hardware\n");
@@ -28,12 +28,11 @@ int main() {
 
 	while(1) {
 		
-		if (hardware_read_obstruction_signal()) {
+		if (hardware_read_stop_signal()) {
 			states_set_next_state(EMERGENCY);
 		}
 		queue_fetch_button_inputs();
 		lights_floor_indicator();
-
 
 		switch (states_get_next_state()) {
 			case IDLE:
