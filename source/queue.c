@@ -80,7 +80,7 @@ int queue_check_orders_above(int currentFloor) {
 			return floor;
 		}
 	}
-	return 0;
+	return -1;
 };
 
 int queue_check_orders_below(int currentFloor) {
@@ -89,7 +89,7 @@ int queue_check_orders_below(int currentFloor) {
 			return floor;
 		}
 	}
-	return 0;
+	return -1;
 };
 
 
@@ -99,7 +99,7 @@ int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction)
 			return floor;
 		}
 	}
-	return 0;
+	return -1;
 }
 
 
@@ -109,20 +109,32 @@ int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction)
 			return floor;
 		}
 	}
-	return 0;
+	return -1;
 };
 
 
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection) {
 	if (prevDirection == HARDWARE_MOVEMENT_UP) {
-		return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
-		return queue_check_orders_above(currentFloor);
+		if (queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP) != -1){
+				return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
+		}
+		if (queue_check_orders_above(currentFloor) != -1){
+					return queue_check_orders_above(currentFloor);
+		}
+		if (queue_check_orders_below(currentFloor) != -1){
 		return queue_check_orders_below(currentFloor);
+		}
 	}
 	else if (prevDirection == HARDWARE_MOVEMENT_DOWN) {
-		return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
+		if (queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_DOWN) != -1){
+				return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
+		}
+		if (queue_check_orders_below(currentFloor) != -1){
 		return queue_check_orders_below(currentFloor);
-		return queue_check_orders_above(currentFloor);
+		}
+		if (queue_check_orders_above(currentFloor) != -1){
+					return queue_check_orders_above(currentFloor);
+		}
 	}
 	return -1;
 };
