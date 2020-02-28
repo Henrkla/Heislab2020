@@ -22,17 +22,20 @@ int queue_check_multiple_orders(int floor) {
 
 void queue_fetch_button_inputs() {
 	for (int floor = 0; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
-		for (int button = ORDER_UP; button <= ORDER_DOWN; button++) {
-			if (hardware_read_order(floor, button) && queue_check_multiple_orders(floor)) {
-				orders[floor] = ORDER_INSIDE;
-			}
-			else if (hardware_read_order(floor, button) && !(queue_check_multiple_orders(floor))) {
-				orders[floor] = button;
-			}
-			else {
-				orders[floor] = ORDER_NONE;
-			}
+		if (((orders[floor] == ORDER_DOWN) && (hardware_read_order(floor, HARDWARE_ORDER_UP))) || 
+		( (orders[floor] == ORDER_UP) && (hardware_read_order(floor, HARDWARE_ORDER_DOWN)) )) {
+			orders[floor] = ORDER_UP_AND_DOWN;
 		}
+		else if (hardware_read_order(floor, HARDWARE_ORDER_UP)) {
+			orders[floor] = ORDER_UP;
+		}
+		else if (hardware_read_order(floor, HARDWARE_ORDER_DOWN)){
+			orders[floor] = ORDER_DOWN;
+		}
+		else if (hardware_read_order(floor, HARDWARE_ORDER_INSIDE)){
+			orders[floor] = ORDER_INSIDE;
+		}
+		queue_order_lights(floor, orders[floor]);
 	}
 };
 
@@ -51,13 +54,13 @@ void queue_clear_all_floors() {
 */
 
 int queue_same_direction(int floor, HardwareMovement direction) {
-	if (orders[floor] == ORDER_INSIDE) {
+	if ((orders[floor] == ORDER_INSIDE)	||	(orders[floor] == ORDER_UP_AND_DOWN)) {
 		return 1;
 	}
 	else if ((direction == HARDWARE_MOVEMENT_DOWN) && (orders[floor] == ORDER_DOWN)) {
 		return 1;
 	}
-	else if (((direction == HARDWARE_MOVEMENT_UP) && (orders[floor] == ORDER_UP)) || (orders[floor])) {
+	else if (((direction == HARDWARE_MOVEMENT_UP) && (orders[floor] == ORDER_UP))) {
 		return 1;
 	}
 	else {
@@ -116,25 +119,41 @@ int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction)
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection) {
 	if (prevDirection == HARDWARE_MOVEMENT_UP) {
 		if (queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP) != -1){
-				return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
+			return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
 		}
 		if (queue_check_orders_above(currentFloor) != -1){
-					return queue_check_orders_above(currentFloor);
+			return queue_check_orders_above(currentFloor);
 		}
 		if (queue_check_orders_below(currentFloor) != -1){
-		return queue_check_orders_below(currentFloor);
+			return queue_check_orders_below(currentFloor);
 		}
 	}
 	else if (prevDirection == HARDWARE_MOVEMENT_DOWN) {
-		if (queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_DOWN) != -1){
-				return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
+		if (queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN) != -1){
+				return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
 		}
 		if (queue_check_orders_below(currentFloor) != -1){
-		return queue_check_orders_below(currentFloor);
+			return queue_check_orders_below(currentFloor);
 		}
 		if (queue_check_orders_above(currentFloor) != -1){
-					return queue_check_orders_above(currentFloor);
+			return queue_check_orders_above(currentFloor);
 		}
 	}
 	return -1;
 };
+
+void queue_order_lights(int floor, ORDER order) {
+	if (order == ORDER_UP){
+		hardware_command_order_light(floor, HARDWARE_ORDER_UP, 1);
+	}
+	else if (order == ORDER_UP_AND_DOWN){
+		hardware_command_order_light(floor, HARDWARE_ORDER_UP, 1);
+		hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 1);
+	}
+	else if (order == ORDER_DOWN){
+			hardware_command_order_light(floor, HARDWARE_ORDER_DOWN, 1);
+	}
+	else if (order == ORDER_INSIDE){
+			hardware_command_order_light(floor, HARDWARE_ORDER_INSIDE, 1);
+	}
+}

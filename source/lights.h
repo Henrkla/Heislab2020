@@ -14,7 +14,7 @@
 void lights_floor_indicator();
 
 /**
-* @brief Rester lysene på panelet
+* @brief Rester lysene pï¿½ panelet
 */
 
 void lights_reset_floor(int floor);
@@ -25,16 +25,6 @@ void lights_reset_floor(int floor);
 
 void lights_order_emergency_clear_all();
 
-/**
-* @brief Sjekker etasje, returnerer -1 mellom etasjer.
-*/
 
-int lights_floor_check();
-
-/**
-* @brief Returnerer siste etasje heisen har vært.
-*/
-
-int lights_update_current_floor();
 
 #endif

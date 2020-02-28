@@ -12,18 +12,19 @@
   */
 
 typedef enum ORDERS {
-	ORDER_NONE = -1,						// Ingen Bestilling
-	ORDER_UP = HARDWARE_ORDER_UP,			// Bestilling oppover
-	ORDER_DOWN = HARDWARE_ORDER_DOWN,		// Bestilling Nedover
-	ORDER_INSIDE = HARDWARE_ORDER_INSIDE	// Bestilling Både opp og ned eller Bestilling fra inne i heisen
+	ORDER_NONE,						  // Ingen Bestilling
+	ORDER_UP,			          // Bestilling oppover
+	ORDER_DOWN,	            // Bestilling Nedover
+	ORDER_INSIDE,	          // Bestilling Bï¿½de opp og ned eller Bestilling fra inne i heisen
+  ORDER_UP_AND_DOWN,
 } ORDER;
 
 
-/** @brief Sjekker om det er tryket inn både opp og ned knapp i en etasje
+/** @brief Sjekker om det er tryket inn bï¿½de opp og ned knapp i en etasje
 */
 int queue_check_multiple_orders(int floor);
 
-/** @brief Sjekker alle knappene og oppdaterer arrayet med aktive knapper. Tar også høyde for om to knapper er trykket inn om gangen
+/** @brief Sjekker alle knappene og oppdaterer arrayet med aktive knapper. Tar ogsï¿½ hï¿½yde for om to knapper er trykket inn om gangen
   */
 void queue_fetch_button_inputs();
 
@@ -35,7 +36,7 @@ void queue_clear_floor(int floor);
 */
 void queue_clear_all_floors();
 
-/** @brief sjekker hvorvidt heisen kjører i samme retning som en bestilling
+/** @brief sjekker hvorvidt heisen kjï¿½rer i samme retning som en bestilling
   * @param[in] floor
   * @param[in] direction
   *
@@ -51,40 +52,40 @@ int queue_same_direction(int floor, HardwareMovement direction);
 ORDER queue_check_order_floor(int floor);
 
 
-/** @brief Finner nærmeste bestilling over heisen, uavhengig av motorretning
+/** @brief Finner nï¿½rmeste bestilling over heisen, uavhengig av motorretning
   * 
   * @param[in] currentFloor Etasjen vi er i
   *
-  * @return Returner den nærmeste bestillingen over heisen.
+  * @return Returner den nï¿½rmeste bestillingen over heisen.
 */
 int queue_check_orders_above(int currentFloor);
 
 
-/** @brief Finner nærmeste bestilling under heisen, uavhengig av motorretning
+/** @brief Finner nï¿½rmeste bestilling under heisen, uavhengig av motorretning
   *
   * @param[in] currentFloor Etasjen vi er i
   *
-  * @return Returner den nærmeste bestillingen under heisen.
+  * @return Returner den nï¿½rmeste bestillingen under heisen.
 */
 int queue_check_orders_below(int currentFloor);
 
 
-/** @brief Finner nærmeste bestilling over heisen, sjekker også at bestillingene skal i samme retning som heisen
+/** @brief Finner nï¿½rmeste bestilling over heisen, sjekker ogsï¿½ at bestillingene skal i samme retning som heisen
   *
   * @param[in] currentFloor Etasjen vi er i
   * @param[in] direction Retningen heisen har
   *
-  * @return Returner den nærmeste bestillingen over heisen som også skal i samme retning.
+  * @return Returner den nï¿½rmeste bestillingen over heisen som ogsï¿½ skal i samme retning.
 */
 int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction);
 
 
-/** @brief Finner nærmeste bestilling under heisen, sjekker også at bestillingene skal i samme retning som heisen
+/** @brief Finner nï¿½rmeste bestilling under heisen, sjekker ogsï¿½ at bestillingene skal i samme retning som heisen
   *
   * @param[in] currentFloor Etasjen vi er i
   * @param[in] direction Retningen heisen har
   *
-  * @return Returner den nærmeste bestillingen under heisen som også skal i samme retning.
+  * @return Returner den nï¿½rmeste bestillingen under heisen som ogsï¿½ skal i samme retning.
 */
 int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction);
 
@@ -92,12 +93,23 @@ int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction)
 
 /** @brief Finner ut hvilken bestilling som skal betjenes som neste
   * 
-  * @param[in] currentFloor her taes inn den nåhverende etasjen
+  * @param[in] currentFloor her taes inn den nï¿½hverende etasjen
   * @param[in] prevDirection her taes inn den forrige retningen
   * 
   * @return hvilken etasje er neste heisen skal dra til
 */
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection);
+
+
+
+
+/**
+ * @brief Leser bestiilingene og bestillingslysene nÃ¥r det er en bestilling
+ * 
+ * @param floor Etasjen der knappen trykkes pÃ¥
+ * @param order hvilken knapp som trykkes
+ */
+void queue_order_lights(int floor, ORDER order);
 
 
 #endif
