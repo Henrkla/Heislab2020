@@ -9,6 +9,7 @@
 
 
 #define BEETWEEN_FLOORS -1
+#define UNVALID_ORDER -1
 
 static int currentFloor = BEETWEEN_FLOORS;
 
@@ -63,7 +64,7 @@ void state_idle() {
 	if (queue_check_order_floor(currentFloor) != ORDER_NONE) {
 	states_set_next_state(STAY);
 	}
-	else if (queue_get_next_dest(currentFloor, previusDirection) != -1) {
+	else if (queue_get_next_dest(currentFloor, previusDirection) != UNVALID_ORDER) {
 	states_set_next_state(RUN);
 	}
 }
@@ -102,13 +103,13 @@ void state_emergency() {
 		lights_order_emergency_clear_all();
 		queue_clear_all_floors();
 		hardware_command_stop_light(1);
-		if (hardware_floor_check() != -1) {
+		if (hardware_floor_check() != BEETWEEN_FLOORS) {
 			door_open();
 		}
 	}
 	hardware_command_stop_light(0);
 
-	if (hardware_floor_check() == -1) {
+	if (hardware_floor_check() == BEETWEEN_FLOORS) {
 		states_set_next_state(IDLE);
 	}
 	else {

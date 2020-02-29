@@ -9,7 +9,7 @@
 #include "states.h"
 #include <time.h>
 
-#define DOOR_DELAY 3
+#define DOOR_DELAY 2
 
 
 /**@brief Enum that keeps track on the door is open or not
@@ -22,44 +22,53 @@ typedef enum {
 } DOOR_STATE;
 
 
-/**@breif setter currentDoorState til door_state
- * 
- */
-void set_door_state(DOOR_STATE door_state);
-
 
 /*
-* @brief �pner d�r og setter p� d�rlys.
+* @brief Skrur på døren og endrer currentDoorState til DOOR_OPEN
 */
 void door_open();
 
 
+
+
+/** 
+  * @breif Skrur av dørlys og endre currentDoorState til DOOR_CLOSED.
+  *
+  */
 void door_close();
 
-/*
-* @brief Hvis stopknapp er trykket, �pne d�r med mindre heisen er mellom etasjer.
-*/
-void door_stop_button();
-
 /**
-* @brief Sjekker om obstruksjonsbryteren er p�. Holder d�ren �pen hvis den allerde er �pen. P�virker ikke systemet om d�ren er lukket.
-*/
+  * @brief Sjekker om obstruksjonsbryteren er p� og om døren allerede er åpen. 
+  * 
+  * @return Hvorvidt døren er åpen og obstruksjonsiganelet er høyt.(True/False)
+  */
 
 int door_obstruction_check();
 
+
 /**
-* @brief Tidsinterval for �pen d�r. St�r p� i 3 sekunder. resetter timeren ved n�r obstruksjon eller stoppknappen er trykket.
-*/
-
-
-
-void door_timer();
-
+  * @breif Forteller om hvorvidt tiden er utgått
+  *
+  * @return Returnerer hvorvidt tiden er utløpt (True/False)
+  *
+  */
 int timer_expired();
 
+/**
+  * @breif Resetter timeren
+  */
 void timer_reset();
 
+/**
+  * @breif Setter timer_is_on variabelen høy
+  *
+  */
 void timer_on();
 
+
+/**
+  * @breif Setter timer_is_on variabelen lav
+  *
+  */
 void timer_off();
 #endif

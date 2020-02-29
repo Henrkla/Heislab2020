@@ -7,12 +7,9 @@
 
 static DOOR_STATE currentDoorState = DOOR_CLOSED;
 time_t start_time = 0;
-int timer_is_on = 0;
+static int timer_is_on = 0;
 
 
-void set_door_state(DOOR_STATE door_state){
-	currentDoorState = door_state;
-}
 
 void door_open() {
 	if (hardware_floor_check() != -1) {
@@ -31,23 +28,9 @@ int door_obstruction_check() {
 }
 
 
-void door_timer() {
-	/*double time_used = difftime(current_time, start_time);
-
-	if (time_used < DOOR_DELAY) {
-
-		if (hardware_read_obstruction_signal() || hardware_read_stop_signal()) {
-			start_time = time(NULL);
-
-		}
-		//current_time = time(NULL);
-		//time_used = difftime(current_time, start_time);
-
-	}*/
-};
 
 int timer_expired() {
-	return (time(NULL) - start_time > 2);
+	return (time(NULL) - start_time > DOOR_DELAY);
 	//return (difftime(time(NULL), start_time) > 3);
 }
 

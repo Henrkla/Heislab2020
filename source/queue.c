@@ -7,6 +7,7 @@
 
 
 #define BETWEEN_FLOORS -1
+#define UNVALID_ORDER -1
 #define NUMBER_OF_BUTTONS 3
 
 static ORDER orders[HARDWARE_NUMBER_OF_FLOORS];
@@ -83,7 +84,7 @@ int queue_check_orders_above(int currentFloor) {
 			return floor;
 		}
 	}
-	return -1;
+	return UNVALID_ORDER;
 };
 
 int queue_check_orders_below(int currentFloor) {
@@ -92,7 +93,7 @@ int queue_check_orders_below(int currentFloor) {
 			return floor;
 		}
 	}
-	return -1;
+	return UNVALID_ORDER;
 };
 
 
@@ -102,7 +103,7 @@ int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction)
 			return floor;
 		}
 	}
-	return -1;
+	return UNVALID_ORDER;
 }
 
 
@@ -112,34 +113,34 @@ int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction)
 			return floor;
 		}
 	}
-	return -1;
+	return UNVALID_ORDER;
 };
 
 
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection) {
 	if (prevDirection == HARDWARE_MOVEMENT_UP) {
-		if (queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP) != -1){
+		if (queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP) != UNVALID_ORDER){
 			return queue_check_orders_above_motor(currentFloor, HARDWARE_MOVEMENT_UP);
 		}
-		if (queue_check_orders_above(currentFloor) != -1){
+		if (queue_check_orders_above(currentFloor) != UNVALID_ORDER){
 			return queue_check_orders_above(currentFloor);
 		}
-		if (queue_check_orders_below(currentFloor) != -1){
+		if (queue_check_orders_below(currentFloor) != UNVALID_ORDER){
 			return queue_check_orders_below(currentFloor);
 		}
 	}
 	else if (prevDirection == HARDWARE_MOVEMENT_DOWN) {
-		if (queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN) != -1){
+		if (queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN) != UNVALID_ORDER){
 				return queue_check_orders_below_motor(currentFloor, HARDWARE_MOVEMENT_DOWN);
 		}
-		if (queue_check_orders_below(currentFloor) != -1){
+		if (queue_check_orders_below(currentFloor) != UNVALID_ORDER){
 			return queue_check_orders_below(currentFloor);
 		}
-		if (queue_check_orders_above(currentFloor) != -1){
+		if (queue_check_orders_above(currentFloor) != UNVALID_ORDER){
 			return queue_check_orders_above(currentFloor);
 		}
 	}
-	return -1;
+	return UNVALID_ORDER;
 };
 
 void queue_order_lights(int floor, ORDER order) {
