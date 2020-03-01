@@ -27,7 +27,6 @@ int main() {
 	state_init();
 
 	while(1) {
-		//printf("%d", hardware_read_obstruction_signal());
 		
 		if (hardware_read_stop_signal()) {
 			states_set_next_state(EMERGENCY);

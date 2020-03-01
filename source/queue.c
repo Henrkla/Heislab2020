@@ -50,10 +50,6 @@ void queue_clear_all_floors() {
 	}
 };
 
-/*
-* gcc er ikke spesielt happy n�r vi sammenligner to enums "(orders[floor] == HARDWARE_ORDER_DOWN)", og flagger dette som en feil. Mulig vi m� finne en bedre m�te � gj�re dette p�, men er mulig � fjerne flagget som sier det er feil.
-*/
-
 int queue_same_direction(int floor, HardwareMovement direction) {
 	if ((orders[floor] == ORDER_INSIDE)	||	(orders[floor] == ORDER_UP_AND_DOWN)) {
 		return 1;
@@ -73,11 +69,6 @@ ORDER queue_check_order_floor(int floor) {
 	return orders[floor];
 };
 
-/*
-* La til return 0; p� alle int funksjoner under. (unntatt den som returnerer -1)
-*/
-
-
 int queue_check_orders_above(int currentFloor) {
 	for (int floor = currentFloor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
 		if (queue_check_order_floor(floor) != ORDER_NONE) {
@@ -96,7 +87,6 @@ int queue_check_orders_below(int currentFloor) {
 	return UNVALID_ORDER;
 };
 
-
 int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction) {
 	for (int floor = currentFloor; floor < HARDWARE_NUMBER_OF_FLOORS; floor++) {
 		if ((queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction))) {
@@ -106,7 +96,6 @@ int queue_check_orders_above_motor(int currentFloor, HardwareMovement direction)
 	return UNVALID_ORDER;
 }
 
-
 int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction) {
 	for (int floor = currentFloor; floor >= 0; floor--) {
 		if ((queue_check_order_floor(floor) != ORDER_NONE) && (queue_same_direction(floor, direction))) {
@@ -115,7 +104,6 @@ int queue_check_orders_below_motor(int currentFloor, HardwareMovement direction)
 	}
 	return UNVALID_ORDER;
 };
-
 
 int queue_get_next_dest(int currentFloor, HardwareMovement prevDirection) {
 	if (prevDirection == HARDWARE_MOVEMENT_UP) {

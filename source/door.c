@@ -30,7 +30,6 @@ int door_obstruction_check() {
 
 int timer_expired() {
 	return (time(NULL) - start_time > DOOR_DELAY);
-	//return (difftime(time(NULL), start_time) > 3);
 }
 
 void timer_reset() {
