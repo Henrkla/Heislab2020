@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "hardware.h"
-#include "lights.h"
-#include "states.h"
 #include <time.h>
 
 #define DOOR_DELAY 2

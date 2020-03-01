@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "lights.h"
-#include "door.h"
 
 void lights_floor_indicator() {
 	if (hardware_floor_check() != -1){

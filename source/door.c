@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "hardware.h"
 #include "door.h"
-#include "lights.h"
 #include <time.h>
 
 static DOOR_STATE currentDoorState = DOOR_CLOSED;

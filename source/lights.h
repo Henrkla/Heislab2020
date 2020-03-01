@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hardware.h"
-#include "door.h"
 
 /**
 * @brief Setter etasje lys
